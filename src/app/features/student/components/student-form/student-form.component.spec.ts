@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -49,6 +50,7 @@ describe('StudentFormComponent', () => {
         MatInputModule,
         MatFormFieldModule,
         MatSnackBarModule,
+        MatSelectModule,
         HttpClientTestingModule,
         NoopAnimationsModule
       ],
@@ -83,6 +85,13 @@ describe('StudentFormComponent', () => {
 
     it('should initialize empty form', () => {
       expect(component.studentForm.get('fullName')?.value).toBe('');
+    });
+
+    it('should populate yearOptions from 2000 to currentYear+2', () => {
+      const currentYear = new Date().getFullYear();
+      expect(component.yearOptions.length).toBe(currentYear + 2 - 2000 + 1);
+      expect(component.yearOptions[0]).toBe(currentYear + 2);
+      expect(component.yearOptions[component.yearOptions.length - 1]).toBe(2000);
     });
 
     it('should create student on valid submit', () => {

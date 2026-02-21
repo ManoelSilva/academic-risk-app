@@ -9,63 +9,60 @@
   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
 
     <mat-card class="form-section">
-      <mat-card-header>
-        <mat-icon mat-card-avatar class="section-icon">person</mat-icon>
-        <mat-card-title>Personal & Academic Info</mat-card-title>
-      </mat-card-header>
+      <div class="section-header">
+        <div class="section-icon"><mat-icon>person</mat-icon></div>
+        <span class="section-title">Personal & Academic Info</span>
+      </div>
       <mat-card-content>
         <div class="form-row">
-          <mat-form-field appearance="outline" class="form-field-full">
+          <mat-form-field appearance="outline" class="form-field-full" [class.field-invalid]="studentForm.get('fullName')?.invalid && studentForm.get('fullName')?.touched">
             <mat-label>Full Name</mat-label>
             <input matInput formControlName="fullName">
             <mat-icon matSuffix>badge</mat-icon>
-            <mat-error *ngIf="studentForm.get('fullName')?.hasError('required')">Required</mat-error>
           </mat-form-field>
         </div>
 
         <div class="form-row two-col">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('registrationNumber')?.invalid && studentForm.get('registrationNumber')?.touched">
             <mat-label>Registration Number</mat-label>
             <input matInput formControlName="registrationNumber">
             <mat-icon matSuffix>tag</mat-icon>
-            <mat-error *ngIf="studentForm.get('registrationNumber')?.hasError('required')">Required</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
             <mat-label>Course</mat-label>
             <input matInput formControlName="course">
             <mat-icon matSuffix>menu_book</mat-icon>
-            <mat-error *ngIf="studentForm.get('course')?.hasError('required')">Required</mat-error>
           </mat-form-field>
         </div>
 
         <div class="form-row three-col">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('academicYear')?.invalid && studentForm.get('academicYear')?.touched">
             <mat-label>Academic Year</mat-label>
-            <input matInput type="number" formControlName="academicYear">
-            <mat-error *ngIf="studentForm.get('academicYear')?.hasError('required')">Required</mat-error>
+            <mat-select formControlName="academicYear">
+              <mat-option *ngFor="let year of yearOptions" [value]="year">{{ year }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>calendar_today</mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('gpa')?.invalid && studentForm.get('gpa')?.touched">
             <mat-label>GPA (0-10)</mat-label>
             <input matInput type="number" formControlName="gpa" step="0.1">
-            <mat-error *ngIf="studentForm.get('gpa')?.hasError('required')">Required</mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('attendancePercentage')?.invalid && studentForm.get('attendancePercentage')?.touched">
             <mat-label>Attendance (%)</mat-label>
             <input matInput type="number" formControlName="attendancePercentage">
-            <mat-error *ngIf="studentForm.get('attendancePercentage')?.hasError('required')">Required</mat-error>
           </mat-form-field>
         </div>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="form-section">
-      <mat-card-header>
-        <mat-icon mat-card-avatar class="section-icon">analytics</mat-icon>
-        <mat-card-title>Risk Model Indicators</mat-card-title>
-      </mat-card-header>
+      <div class="section-header">
+        <div class="section-icon icon-green"><mat-icon>analytics</mat-icon></div>
+        <span class="section-title">Risk Model Indicators</span>
+      </div>
       <mat-card-content>
         <div class="form-row three-col">
           <mat-form-field appearance="outline">

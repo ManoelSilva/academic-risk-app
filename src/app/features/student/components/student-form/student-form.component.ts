@@ -15,6 +15,7 @@ export class StudentFormComponent implements OnInit {
   isEditMode = false;
   studentId: number | null = null;
   loading = false;
+  yearOptions: number[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -23,15 +24,19 @@ export class StudentFormComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar
   ) {
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear + 2; y >= 2000; y--) {
+      this.yearOptions.push(y);
+    }
+
     this.studentForm = this.fb.group({
       fullName: ['', Validators.required],
       registrationNumber: ['', Validators.required],
       course: ['', Validators.required],
-      academicYear: [new Date().getFullYear(), [Validators.required, Validators.min(2000), Validators.max(2100)]],
+      academicYear: [currentYear, [Validators.required, Validators.min(2000), Validators.max(2100)]],
       gpa: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
       attendancePercentage: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
-      
-      // Risk Model Fields
+
       inde: [null],
       iaa: [null],
       ieg: [null],
@@ -67,7 +72,7 @@ export class StudentFormComponent implements OnInit {
         this.studentForm.patchValue(student);
         this.loading = false;
       },
-      error: (err) => {
+      error: () => {
         this.snackBar.open('Error loading student', 'Close', { duration: 3000 });
         this.loading = false;
         this.router.navigate(['/students']);
@@ -87,7 +92,7 @@ export class StudentFormComponent implements OnInit {
           this.snackBar.open('Student updated successfully', 'Close', { duration: 3000 });
           this.router.navigate(['/students']);
         },
-        error: (err) => {
+        error: () => {
           this.snackBar.open('Error updating student', 'Close', { duration: 3000 });
           this.loading = false;
         }
@@ -98,7 +103,7 @@ export class StudentFormComponent implements OnInit {
           this.snackBar.open('Student created successfully', 'Close', { duration: 3000 });
           this.router.navigate(['/students']);
         },
-        error: (err) => {
+        error: () => {
           this.snackBar.open('Error creating student', 'Close', { duration: 3000 });
           this.loading = false;
         }

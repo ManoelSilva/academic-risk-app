@@ -23,21 +23,42 @@
   .form-section {
     margin-bottom: 20px;
     padding: 24px;
+  }
 
-    mat-card-header {
-      margin-bottom: 16px;
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
 
-      .section-icon {
-        background: #e3f2fd;
-        color: #1976d2;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
+    .section-icon {
+      background: #e3f2fd;
+      color: #1976d2;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+
+      mat-icon {
         font-size: 20px;
+        width: 20px;
+        height: 20px;
       }
+
+      &.icon-green {
+        background: #e8f5e9;
+        color: #388e3c;
+      }
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #263238;
+      line-height: 40px;
     }
   }
 
@@ -46,12 +67,7 @@
     gap: 16px;
     margin-bottom: 4px;
 
-    &.two-col {
-      > mat-form-field {
-        flex: 1;
-      }
-    }
-
+    &.two-col,
     &.three-col {
       > mat-form-field {
         flex: 1;
@@ -65,6 +81,18 @@
 
   .form-field-full {
     width: 100%;
+  }
+
+  // Red border on invalid touched fields (no text error)
+  .field-invalid {
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: #d32f2f !important;
+    }
+    .mat-mdc-floating-label {
+      color: #d32f2f !important;
+    }
   }
 
   .form-actions {
@@ -86,6 +114,12 @@
       }
     }
   }
+}
+
+// Input text padding fix
+::ng-deep .mat-mdc-form-field .mat-mdc-input-element,
+::ng-deep .mat-mdc-form-field .mat-mdc-select-value {
+  padding-left: 4px !important;
 }
 
 @media (max-width: 768px) {

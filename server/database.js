@@ -30,6 +30,10 @@ const db = new sqlite3.Database(dbPath, (err) => {
             pedra TEXT,
             pontoVirada TEXT,
             sinalizadorIngressante TEXT,
+            riskScore REAL,
+            riskProbability REAL,
+            riskLabel TEXT,
+            riskEvaluatedAt TEXT,
             createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
             updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
             )`,
@@ -37,6 +41,10 @@ const db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
             console.error('Error creating table: ' + err.message);
         }
+        ['riskScore REAL', 'riskProbability REAL', 'riskLabel TEXT', 'riskEvaluatedAt TEXT'].forEach(col => {
+            const name = col.split(' ')[0];
+            db.run(`ALTER TABLE students ADD COLUMN ${col}`, () => {});
+        });
     });
   }
 });

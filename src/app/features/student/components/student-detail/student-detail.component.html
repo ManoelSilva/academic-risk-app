@@ -47,10 +47,38 @@
         <span class="section-title">Risk Evaluation</span>
       </div>
       <mat-card-content>
-        <p class="placeholder-text">Risk evaluation not yet performed.</p>
-        <button mat-raised-button color="primary" disabled class="evaluate-btn">
-          <mat-icon>psychology</mat-icon> Evaluate Risk (Phase 4)
-        </button>
+        <div *ngIf="hasRiskEvaluation; else noEvaluation" class="risk-result" [ngClass]="riskColorClass">
+          <div class="risk-badge">
+            <mat-icon>{{ student.riskLabel === 'Low Risk' ? 'check_circle' : 'warning' }}</mat-icon>
+            <span class="risk-label-text">{{ student.riskLabel }}</span>
+          </div>
+          <div class="risk-details">
+            <div class="risk-detail-item">
+              <span class="risk-detail-label">Probability</span>
+              <span class="risk-detail-value">{{ riskProbabilityPercent }}%</span>
+            </div>
+            <div class="risk-detail-item">
+              <span class="risk-detail-label">Evaluated</span>
+              <span class="risk-detail-value">{{ student.riskEvaluatedAt | date:'short' }}</span>
+            </div>
+          </div>
+          <button mat-stroked-button color="primary" (click)="evaluateRisk()" [disabled]="evaluating" class="re-evaluate-btn">
+            <mat-spinner *ngIf="evaluating" diameter="18"></mat-spinner>
+            <mat-icon *ngIf="!evaluating">refresh</mat-icon>
+            Re-evaluate
+          </button>
+        </div>
+        <ng-template #noEvaluation>
+          <p class="placeholder-text" *ngIf="!riskError">No risk evaluation performed yet.</p>
+          <p class="error-text" *ngIf="riskError">
+            <mat-icon>error_outline</mat-icon> {{ riskError }}
+          </p>
+          <button mat-raised-button color="primary" (click)="evaluateRisk()" [disabled]="evaluating" class="evaluate-btn">
+            <mat-spinner *ngIf="evaluating" diameter="18"></mat-spinner>
+            <mat-icon *ngIf="!evaluating">psychology</mat-icon>
+            {{ evaluating ? 'Evaluating...' : 'Evaluate Risk' }}
+          </button>
+        </ng-template>
       </mat-card-content>
     </mat-card>
   </div>

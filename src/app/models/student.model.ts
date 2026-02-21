@@ -24,4 +24,9 @@ export interface Student {
   pedra?: string;
   pontoVirada?: string;
   sinalizadorIngressante?: string;
+
+  riskScore?: number;
+  riskProbability?: number;
+  riskLabel?: string;
+  riskEvaluatedAt?: string;
 }

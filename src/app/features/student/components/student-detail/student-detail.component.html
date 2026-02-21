@@ -21,10 +21,10 @@
 
   <div class="content-grid">
     <mat-card>
-      <mat-card-header>
-        <mat-icon mat-card-avatar class="section-icon info-icon">school</mat-icon>
-        <mat-card-title>Academic Info</mat-card-title>
-      </mat-card-header>
+      <div class="section-header">
+        <div class="section-icon info-icon"><mat-icon>school</mat-icon></div>
+        <span class="section-title">Academic Info</span>
+      </div>
       <mat-card-content class="info-list">
         <div class="info-item">
           <span class="info-label">Year</span>
@@ -42,10 +42,10 @@
     </mat-card>
 
     <mat-card>
-      <mat-card-header>
-        <mat-icon mat-card-avatar class="section-icon risk-icon">assessment</mat-icon>
-        <mat-card-title>Risk Evaluation</mat-card-title>
-      </mat-card-header>
+      <div class="section-header">
+        <div class="section-icon risk-icon"><mat-icon>assessment</mat-icon></div>
+        <span class="section-title">Risk Evaluation</span>
+      </div>
       <mat-card-content>
         <p class="placeholder-text">Risk evaluation not yet performed.</p>
         <button mat-raised-button color="primary" disabled class="evaluate-btn">
@@ -56,10 +56,10 @@
   </div>
 
   <mat-card class="indicators-card">
-    <mat-card-header>
-      <mat-icon mat-card-avatar class="section-icon indicators-icon">analytics</mat-icon>
-      <mat-card-title>Risk Indicators</mat-card-title>
-    </mat-card-header>
+    <div class="section-header">
+      <div class="section-icon indicators-icon"><mat-icon>analytics</mat-icon></div>
+      <span class="section-title">Risk Indicators</span>
+    </div>
     <mat-card-content class="indicators-grid">
       <div class="indicator"><span class="ind-label">INDE</span><span class="ind-value">{{ student.inde ?? '-' }}</span></div>
       <div class="indicator"><span class="ind-label">IAA</span><span class="ind-value">{{ student.iaa ?? '-' }}</span></div>

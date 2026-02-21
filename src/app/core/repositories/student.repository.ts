@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class StudentRepository {
-  private readonly apiUrl = 'http://localhost:3000/api/students';
+  private readonly apiUrl = '/api/students';
 
   constructor(private http: HttpClient) { }
 

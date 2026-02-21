@@ -4,13 +4,21 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
-To start a local development server, run:
+For full functionality (including saving and loading students), run both:
+
+1. **Backend API** (SQLite + Express), in one terminal:
+
+```bash
+npm run server
+```
+
+2. **Angular dev server**, in another terminal:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The dev server proxies `/api` requests to the backend at `http://localhost:3000`, so the app uses the same origin and avoids CORS. Once both are running, open your browser at `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding
 

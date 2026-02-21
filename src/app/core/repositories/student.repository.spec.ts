@@ -6,7 +6,7 @@ import { Student } from '../../models/student.model';
 describe('StudentRepository', () => {
   let repository: StudentRepository;
   let httpMock: HttpTestingController;
-  const apiUrl = 'http://localhost:3000/api/students';
+  const apiUrl = '/api/students';
 
   const mockStudents: Student[] = [
     { id: 1, fullName: 'John Doe', registrationNumber: '12345', course: 'CS', academicYear: 2023, gpa: 8.5, attendancePercentage: 90 }

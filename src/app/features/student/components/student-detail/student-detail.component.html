@@ -1,66 +1,86 @@
 <div class="detail-container" *ngIf="student; else loadingTpl">
-  <div class="header">
-    <h1>{{ student.fullName }}</h1>
-    <div class="actions">
-        <button mat-stroked-button color="primary" routerLink="/students">Back</button>
-        <button mat-raised-button color="accent" [routerLink]="['/students', student.id, 'edit']">Edit</button>
-        <button mat-raised-button color="warn" (click)="deleteStudent()">Delete</button>
+  <div class="detail-header">
+    <div class="header-left">
+      <button mat-icon-button routerLink="/students" class="back-btn">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div>
+        <h1>{{ student.fullName }}</h1>
+        <span class="subtitle">{{ student.course }} &mdash; {{ student.registrationNumber }}</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="accent" [routerLink]="['/students', student.id, 'edit']">
+        <mat-icon>edit</mat-icon> Edit
+      </button>
+      <button mat-raised-button color="warn" (click)="deleteStudent()">
+        <mat-icon>delete</mat-icon> Delete
+      </button>
     </div>
   </div>
 
   <div class="content-grid">
     <mat-card>
       <mat-card-header>
+        <mat-icon mat-card-avatar class="section-icon info-icon">school</mat-icon>
         <mat-card-title>Academic Info</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-        <p><strong>Registration:</strong> {{ student.registrationNumber }}</p>
-        <p><strong>Course:</strong> {{ student.course }}</p>
-        <p><strong>Year:</strong> {{ student.academicYear }}</p>
-        <p><strong>GPA:</strong> {{ student.gpa }}</p>
-        <p><strong>Attendance:</strong> {{ student.attendancePercentage }}%</p>
+      <mat-card-content class="info-list">
+        <div class="info-item">
+          <span class="info-label">Year</span>
+          <span class="info-value">{{ student.academicYear }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">GPA</span>
+          <span class="info-value highlight">{{ student.gpa }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Attendance</span>
+          <span class="info-value">{{ student.attendancePercentage }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
 
     <mat-card>
       <mat-card-header>
+        <mat-icon mat-card-avatar class="section-icon risk-icon">assessment</mat-icon>
         <mat-card-title>Risk Evaluation</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <!-- Placeholder for Phase 4 -->
-        <p>Risk evaluation not yet performed.</p>
-        <div class="risk-actions mt-4">
-             <button mat-raised-button color="primary" disabled>Evaluate Risk (Phase 4)</button>
-        </div>
+        <p class="placeholder-text">Risk evaluation not yet performed.</p>
+        <button mat-raised-button color="primary" disabled class="evaluate-btn">
+          <mat-icon>psychology</mat-icon> Evaluate Risk (Phase 4)
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
-  
-  <mat-card class="mt-4">
-      <mat-card-header>
-        <mat-card-title>Risk Indicators (Raw Data)</mat-card-title>
-      </mat-card-header>
-      <mat-card-content class="indicators-grid">
-          <div><strong>INDE:</strong> {{ student.inde || '-' }}</div>
-          <div><strong>IAA:</strong> {{ student.iaa || '-' }}</div>
-          <div><strong>IEG:</strong> {{ student.ieg || '-' }}</div>
-          <div><strong>IPS:</strong> {{ student.ips || '-' }}</div>
-          <div><strong>IDA:</strong> {{ student.ida || '-' }}</div>
-          <div><strong>IPP:</strong> {{ student.ipp || '-' }}</div>
-          <div><strong>IPV:</strong> {{ student.ipv || '-' }}</div>
-          <div><strong>IAN:</strong> {{ student.ian || '-' }}</div>
-          <div><strong>Defasagem:</strong> {{ student.defasagem || '-' }}</div>
-          <div><strong>Idade:</strong> {{ student.idadeAluno || '-' }}</div>
-          <div><strong>Anos PM:</strong> {{ student.anosPm || '-' }}</div>
-          <div><strong>Pedra:</strong> {{ student.pedra || '-' }}</div>
-          <div><strong>Ponto Virada:</strong> {{ student.pontoVirada || '-' }}</div>
-          <div><strong>Sinalizador:</strong> {{ student.sinalizadorIngressante || '-' }}</div>
-      </mat-card-content>
+
+  <mat-card class="indicators-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar class="section-icon indicators-icon">analytics</mat-icon>
+      <mat-card-title>Risk Indicators</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="indicators-grid">
+      <div class="indicator"><span class="ind-label">INDE</span><span class="ind-value">{{ student.inde ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IAA</span><span class="ind-value">{{ student.iaa ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IEG</span><span class="ind-value">{{ student.ieg ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IPS</span><span class="ind-value">{{ student.ips ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IDA</span><span class="ind-value">{{ student.ida ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IPP</span><span class="ind-value">{{ student.ipp ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IPV</span><span class="ind-value">{{ student.ipv ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">IAN</span><span class="ind-value">{{ student.ian ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">Defasagem</span><span class="ind-value">{{ student.defasagem ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">Idade</span><span class="ind-value">{{ student.idadeAluno ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">Anos PM</span><span class="ind-value">{{ student.anosPm ?? '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">Pedra</span><span class="ind-value">{{ student.pedra || '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">Ponto Virada</span><span class="ind-value">{{ student.pontoVirada || '-' }}</span></div>
+      <div class="indicator"><span class="ind-label">Sinalizador</span><span class="ind-value">{{ student.sinalizadorIngressante || '-' }}</span></div>
+    </mat-card-content>
   </mat-card>
 </div>
 
 <ng-template #loadingTpl>
   <div class="loading-spinner">
-    <mat-spinner></mat-spinner>
+    <mat-spinner diameter="40"></mat-spinner>
   </div>
 </ng-template>

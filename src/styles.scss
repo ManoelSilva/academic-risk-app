@@ -1,1 +1,60 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  color: #263238;
+  font-weight: 500;
+}
+
+.cdk-overlay-container {
+  z-index: 2000 !important;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .mat-mdc-header-row {
+    background: #fafafa;
+  }
+
+  .mat-mdc-row:hover {
+    background: #f0f7ff;
+  }
+}
+
+.mat-mdc-card {
+  border-radius: 12px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #e8e8e8;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  border-radius: 6px;
+}
+
+.mat-mdc-form-field {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #ccc !important;
+  }
+}

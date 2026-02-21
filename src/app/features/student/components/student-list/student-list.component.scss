@@ -1,20 +1,71 @@
 .student-list-container {
-  padding: 20px;
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-  }
+    margin-bottom: 24px;
 
-  table {
-    width: 100%;
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+    }
+
+    button mat-icon {
+      margin-right: 4px;
+    }
   }
 
   .loading-spinner {
     display: flex;
     justify-content: center;
-    margin: 20px 0;
+    padding: 48px 0;
+  }
+
+  .table-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+
+    table {
+      width: 100%;
+    }
+  }
+
+  .name-cell {
+    font-weight: 500;
+    color: #1a237e;
+  }
+
+  .actions-header {
+    text-align: center;
+  }
+
+  .actions-cell {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .action-view {
+    color: #1976d2;
+  }
+
+  .action-edit {
+    color: #f57c00;
+  }
+
+  .action-delete {
+    color: #d32f2f;
+  }
+
+  .empty-row {
+    text-align: center;
+    padding: 48px 16px !important;
+    color: #888;
+    font-style: italic;
   }
 }

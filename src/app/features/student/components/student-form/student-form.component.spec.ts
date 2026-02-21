@@ -11,6 +11,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentService } from '../../../../core/services/student.service';
 import { of, throwError } from 'rxjs';
 import { Student } from '../../../../models/student.model';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('StudentFormComponent', () => {
   let component: StudentFormComponent;
@@ -56,7 +57,8 @@ describe('StudentFormComponent', () => {
         { provide: Router, useValue: rSpy },
         { provide: MatSnackBar, useValue: sbSpy },
         { provide: ActivatedRoute, useValue: activatedRouteStub }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
 

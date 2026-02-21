@@ -9,7 +9,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { of, throwError } from 'rxjs';
 import { Student } from '../../../../models/student.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('StudentDetailComponent', () => {
@@ -41,11 +40,11 @@ describe('StudentDetailComponent', () => {
         MatCardModule,
         MatIconModule,
         MatProgressSpinnerModule,
-        HttpClientTestingModule,
-        RouterTestingModule
+        HttpClientTestingModule
       ],
       providers: [
         { provide: StudentService, useValue: sSpy },
+        { provide: Router, useValue: rSpy },
         { provide: MatDialog, useValue: dSpy },
         {
              provide: ActivatedRoute,
@@ -83,7 +82,7 @@ describe('StudentDetailComponent', () => {
   });
 
   it('should handle load error', () => {
-      spyOn(console, 'error'); // Prevent console.error from showing in test output
+      spyOn(console, 'error');
       studentServiceSpy.getStudent.and.returnValue(throwError(() => new Error('Error')));
       component.loadStudent(1);
       expect(component.loading).toBeFalse();

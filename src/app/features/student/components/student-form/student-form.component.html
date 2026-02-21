@@ -1,0 +1,165 @@
+<div class="form-container">
+  <div class="form-header">
+    <button mat-icon-button routerLink="/students" class="back-btn">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>{{ isEditMode ? 'Edit Student' : 'New Student' }}</h2>
+  </div>
+
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+    <mat-card class="form-section">
+      <div class="section-header">
+        <div class="section-icon"><mat-icon>person</mat-icon></div>
+        <span class="section-title">Personal & Academic Info</span>
+      </div>
+      <mat-card-content>
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field-full" [class.field-invalid]="studentForm.get('fullName')?.invalid && studentForm.get('fullName')?.touched">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="fullName">
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-col">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('registrationNumber')?.invalid && studentForm.get('registrationNumber')?.touched">
+            <mat-label>Registration Number</mat-label>
+            <input matInput formControlName="registrationNumber">
+            <mat-icon matSuffix>tag</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('course')?.invalid && studentForm.get('course')?.touched">
+            <mat-label>Course</mat-label>
+            <input matInput formControlName="course">
+            <mat-icon matSuffix>menu_book</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row three-col">
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('academicYear')?.invalid && studentForm.get('academicYear')?.touched">
+            <mat-label>Academic Year</mat-label>
+            <input matInput
+                   [matDatepicker]="yearPicker"
+                   [min]="minDate"
+                   [max]="maxDate"
+                   [value]="academicYearDate"
+                   readonly
+                   (click)="yearPicker.open()">
+            <mat-datepicker-toggle matSuffix [for]="yearPicker"></mat-datepicker-toggle>
+            <mat-datepicker #yearPicker
+                            startView="multi-year"
+                            (yearSelected)="chosenYearHandler($event, yearPicker)">
+            </mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('gpa')?.invalid && studentForm.get('gpa')?.touched">
+            <mat-label>GPA (0-10)</mat-label>
+            <input matInput type="number" formControlName="gpa" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('attendancePercentage')?.invalid && studentForm.get('attendancePercentage')?.touched">
+            <mat-label>Attendance (%)</mat-label>
+            <input matInput type="number" formControlName="attendancePercentage">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="form-section">
+      <div class="section-header">
+        <div class="section-icon icon-green"><mat-icon>analytics</mat-icon></div>
+        <span class="section-title">Risk Model Indicators</span>
+      </div>
+      <mat-card-content>
+        <div class="form-row three-col">
+          <mat-form-field appearance="outline">
+            <mat-label>INDE</mat-label>
+            <input matInput type="number" formControlName="inde" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>IAA</mat-label>
+            <input matInput type="number" formControlName="iaa" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>IEG</mat-label>
+            <input matInput type="number" formControlName="ieg" step="0.1">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row three-col">
+          <mat-form-field appearance="outline">
+            <mat-label>IPS</mat-label>
+            <input matInput type="number" formControlName="ips" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>IDA</mat-label>
+            <input matInput type="number" formControlName="ida" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>IPP</mat-label>
+            <input matInput type="number" formControlName="ipp" step="0.1">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row three-col">
+          <mat-form-field appearance="outline">
+            <mat-label>IPV</mat-label>
+            <input matInput type="number" formControlName="ipv" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>IAN</mat-label>
+            <input matInput type="number" formControlName="ian" step="0.1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Defasagem</mat-label>
+            <input matInput type="number" formControlName="defasagem">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row three-col">
+          <mat-form-field appearance="outline">
+            <mat-label>Idade Aluno</mat-label>
+            <input matInput type="number" formControlName="idadeAluno">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Anos PM</mat-label>
+            <input matInput type="number" formControlName="anosPm">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Pedra</mat-label>
+            <input matInput formControlName="pedra">
+          </mat-form-field>
+        </div>
+
+        <div class="form-row two-col">
+          <mat-form-field appearance="outline">
+            <mat-label>Ponto Virada</mat-label>
+            <input matInput formControlName="pontoVirada">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sinalizador Ingressante</mat-label>
+            <input matInput formControlName="sinalizadorIngressante">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="form-actions">
+      <button mat-stroked-button type="button" routerLink="/students">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="studentForm.invalid || loading">
+        <mat-icon>{{ isEditMode ? 'save' : 'add' }}</mat-icon>
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+    </div>
+  </form>
+</div>

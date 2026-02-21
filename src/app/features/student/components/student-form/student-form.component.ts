@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../../../../core/services/student.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-student-form',
@@ -15,7 +16,10 @@ export class StudentFormComponent implements OnInit {
   isEditMode = false;
   studentId: number | null = null;
   loading = false;
-  yearOptions: number[] = [];
+
+  minDate = new Date(2000, 0, 1);
+  maxDate = new Date(new Date().getFullYear() + 2, 11, 31);
+  academicYearDate: Date;
 
   constructor(
     private fb: FormBuilder,
@@ -25,9 +29,7 @@ export class StudentFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     const currentYear = new Date().getFullYear();
-    for (let y = currentYear + 2; y >= 2000; y--) {
-      this.yearOptions.push(y);
-    }
+    this.academicYearDate = new Date(currentYear, 0, 1);
 
     this.studentForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -65,11 +67,21 @@ export class StudentFormComponent implements OnInit {
     });
   }
 
+  chosenYearHandler(normalizedYear: Date, datepicker: MatDatepicker<Date>): void {
+    const year = normalizedYear.getFullYear();
+    this.academicYearDate = new Date(year, 0, 1);
+    this.studentForm.get('academicYear')?.setValue(year);
+    datepicker.close();
+  }
+
   loadStudent(id: number): void {
     this.loading = true;
     this.studentService.getStudent(id).subscribe({
       next: (student) => {
         this.studentForm.patchValue(student);
+        if (student.academicYear) {
+          this.academicYearDate = new Date(student.academicYear, 0, 1);
+        }
         this.loading = false;
       },
       error: () => {

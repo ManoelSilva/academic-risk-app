@@ -39,10 +39,18 @@
         <div class="form-row three-col">
           <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('academicYear')?.invalid && studentForm.get('academicYear')?.touched">
             <mat-label>Academic Year</mat-label>
-            <mat-select formControlName="academicYear">
-              <mat-option *ngFor="let year of yearOptions" [value]="year">{{ year }}</mat-option>
-            </mat-select>
-            <mat-icon matSuffix>calendar_today</mat-icon>
+            <input matInput
+                   [matDatepicker]="yearPicker"
+                   [min]="minDate"
+                   [max]="maxDate"
+                   [value]="academicYearDate"
+                   readonly
+                   (click)="yearPicker.open()">
+            <mat-datepicker-toggle matSuffix [for]="yearPicker"></mat-datepicker-toggle>
+            <mat-datepicker #yearPicker
+                            startView="multi-year"
+                            (yearSelected)="chosenYearHandler($event, yearPicker)">
+            </mat-datepicker>
           </mat-form-field>
 
           <mat-form-field appearance="outline" [class.field-invalid]="studentForm.get('gpa')?.invalid && studentForm.get('gpa')?.touched">

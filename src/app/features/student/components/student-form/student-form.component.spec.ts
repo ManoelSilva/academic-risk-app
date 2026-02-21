@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,6 +53,8 @@ describe('StudentFormComponent', () => {
         MatFormFieldModule,
         MatSnackBarModule,
         MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         HttpClientTestingModule,
         NoopAnimationsModule
       ],
@@ -87,11 +91,25 @@ describe('StudentFormComponent', () => {
       expect(component.studentForm.get('fullName')?.value).toBe('');
     });
 
-    it('should populate yearOptions from 2000 to currentYear+2', () => {
+    it('should initialize academicYearDate to current year', () => {
       const currentYear = new Date().getFullYear();
-      expect(component.yearOptions.length).toBe(currentYear + 2 - 2000 + 1);
-      expect(component.yearOptions[0]).toBe(currentYear + 2);
-      expect(component.yearOptions[component.yearOptions.length - 1]).toBe(2000);
+      expect(component.academicYearDate.getFullYear()).toBe(currentYear);
+    });
+
+    it('should set minDate to year 2000 and maxDate to currentYear+2', () => {
+      const currentYear = new Date().getFullYear();
+      expect(component.minDate.getFullYear()).toBe(2000);
+      expect(component.maxDate.getFullYear()).toBe(currentYear + 2);
+    });
+
+    it('should update academicYear form value via chosenYearHandler', () => {
+      const fakeDate = new Date(2025, 0, 1);
+      const fakePicker = { close: jasmine.createSpy('close') } as any;
+      component.chosenYearHandler(fakeDate, fakePicker);
+
+      expect(component.academicYearDate.getFullYear()).toBe(2025);
+      expect(component.studentForm.get('academicYear')?.value).toBe(2025);
+      expect(fakePicker.close).toHaveBeenCalled();
     });
 
     it('should create student on valid submit', () => {
@@ -113,14 +131,14 @@ describe('StudentFormComponent', () => {
     });
 
     it('should handle create error', () => {
-        component.studentForm.patchValue({
-            fullName: 'New Student',
-            registrationNumber: '999',
-            course: 'Math',
-            academicYear: 2024,
-            gpa: 9.0,
-            attendancePercentage: 100
-          });
+      component.studentForm.patchValue({
+        fullName: 'New Student',
+        registrationNumber: '999',
+        course: 'Math',
+        academicYear: 2024,
+        gpa: 9.0,
+        attendancePercentage: 100
+      });
           
       studentServiceSpy.createStudent.and.returnValue(throwError(() => new Error('Error')));
       component.onSubmit();
@@ -148,6 +166,10 @@ describe('StudentFormComponent', () => {
       expect(component.studentForm.get('fullName')?.value).toBe('John Doe');
     });
 
+    it('should sync academicYearDate when loading student', () => {
+      expect(component.academicYearDate.getFullYear()).toBe(2023);
+    });
+
     it('should update student on valid submit', () => {
       studentServiceSpy.updateStudent.and.returnValue(of(mockStudent));
       component.onSubmit();
@@ -166,12 +188,10 @@ describe('StudentFormComponent', () => {
     });
 
     it('should handle load error', () => {
-        // Since ngOnInit runs in beforeEach, we can't easily test load error here 
-        // without refactoring setup, or we can manually call loadStudent.
-        studentServiceSpy.getStudent.and.returnValue(throwError(() => new Error('Error')));
-        component.loadStudent(999);
-        expect(snackBarSpy.open).toHaveBeenCalledWith('Error loading student', 'Close', { duration: 3000 });
-        expect(routerSpy.navigate).toHaveBeenCalledWith(['/students']);
+      studentServiceSpy.getStudent.and.returnValue(throwError(() => new Error('Error')));
+      component.loadStudent(999);
+      expect(snackBarSpy.open).toHaveBeenCalledWith('Error loading student', 'Close', { duration: 3000 });
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/students']);
     });
   });
 });

@@ -1,0 +1,66 @@
+<div class="detail-container" *ngIf="student; else loadingTpl">
+  <div class="header">
+    <h1>{{ student.fullName }}</h1>
+    <div class="actions">
+        <button mat-stroked-button color="primary" routerLink="/students">Back</button>
+        <button mat-raised-button color="accent" [routerLink]="['/students', student.id, 'edit']">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteStudent()">Delete</button>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Academic Info</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Registration:</strong> {{ student.registrationNumber }}</p>
+        <p><strong>Course:</strong> {{ student.course }}</p>
+        <p><strong>Year:</strong> {{ student.academicYear }}</p>
+        <p><strong>GPA:</strong> {{ student.gpa }}</p>
+        <p><strong>Attendance:</strong> {{ student.attendancePercentage }}%</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Risk Evaluation</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Placeholder for Phase 4 -->
+        <p>Risk evaluation not yet performed.</p>
+        <div class="risk-actions mt-4">
+             <button mat-raised-button color="primary" disabled>Evaluate Risk (Phase 4)</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <mat-card class="mt-4">
+      <mat-card-header>
+        <mat-card-title>Risk Indicators (Raw Data)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="indicators-grid">
+          <div><strong>INDE:</strong> {{ student.inde || '-' }}</div>
+          <div><strong>IAA:</strong> {{ student.iaa || '-' }}</div>
+          <div><strong>IEG:</strong> {{ student.ieg || '-' }}</div>
+          <div><strong>IPS:</strong> {{ student.ips || '-' }}</div>
+          <div><strong>IDA:</strong> {{ student.ida || '-' }}</div>
+          <div><strong>IPP:</strong> {{ student.ipp || '-' }}</div>
+          <div><strong>IPV:</strong> {{ student.ipv || '-' }}</div>
+          <div><strong>IAN:</strong> {{ student.ian || '-' }}</div>
+          <div><strong>Defasagem:</strong> {{ student.defasagem || '-' }}</div>
+          <div><strong>Idade:</strong> {{ student.idadeAluno || '-' }}</div>
+          <div><strong>Anos PM:</strong> {{ student.anosPm || '-' }}</div>
+          <div><strong>Pedra:</strong> {{ student.pedra || '-' }}</div>
+          <div><strong>Ponto Virada:</strong> {{ student.pontoVirada || '-' }}</div>
+          <div><strong>Sinalizador:</strong> {{ student.sinalizadorIngressante || '-' }}</div>
+      </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

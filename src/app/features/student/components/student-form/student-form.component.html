@@ -1,0 +1,135 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Edit Student' : 'New Student' }}</h2>
+
+  <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Personal & Academic Info -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Personal & Academic Info</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" placeholder="Ex: John Doe">
+          <mat-error *ngIf="studentForm.get('fullName')?.hasError('required')">Full Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Registration Number</mat-label>
+          <input matInput formControlName="registrationNumber" placeholder="Ex: 2023001">
+          <mat-error *ngIf="studentForm.get('registrationNumber')?.hasError('required')">Registration Number is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Course</mat-label>
+          <input matInput formControlName="course" placeholder="Ex: Computer Science">
+          <mat-error *ngIf="studentForm.get('course')?.hasError('required')">Course is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Academic Year</mat-label>
+          <input matInput type="number" formControlName="academicYear">
+          <mat-error *ngIf="studentForm.get('academicYear')?.hasError('required')">Academic Year is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>GPA (0-10)</mat-label>
+          <input matInput type="number" formControlName="gpa" step="0.1" min="0" max="10">
+          <mat-error *ngIf="studentForm.get('gpa')?.hasError('required')">GPA is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Attendance (%)</mat-label>
+          <input matInput type="number" formControlName="attendancePercentage" min="0" max="100">
+          <mat-error *ngIf="studentForm.get('attendancePercentage')?.hasError('required')">Attendance is required</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Risk Model Indicators -->
+    <mat-card class="mt-4">
+      <mat-card-header>
+        <mat-card-title>Risk Model Indicators</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>INDE</mat-label>
+          <input matInput type="number" formControlName="inde">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IAA</mat-label>
+          <input matInput type="number" formControlName="iaa">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IEG</mat-label>
+          <input matInput type="number" formControlName="ieg">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IPS</mat-label>
+          <input matInput type="number" formControlName="ips">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IDA</mat-label>
+          <input matInput type="number" formControlName="ida">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IPP</mat-label>
+          <input matInput type="number" formControlName="ipp">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IPV</mat-label>
+          <input matInput type="number" formControlName="ipv">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>IAN</mat-label>
+          <input matInput type="number" formControlName="ian">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Defasagem</mat-label>
+          <input matInput type="number" formControlName="defasagem">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Idade Aluno</mat-label>
+          <input matInput type="number" formControlName="idadeAluno">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Anos PM</mat-label>
+          <input matInput type="number" formControlName="anosPm">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Pedra</mat-label>
+          <input matInput formControlName="pedra" placeholder="Ex: Ametista">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ponto Virada</mat-label>
+          <input matInput formControlName="pontoVirada" placeholder="Ex: Não">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Sinalizador Ingressante</mat-label>
+          <input matInput formControlName="sinalizadorIngressante" placeholder="Ex: Não">
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="actions">
+      <button mat-button type="button" routerLink="/students">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="studentForm.invalid || loading">
+        {{ isEditMode ? 'Update' : 'Create' }}
+      </button>
+    </div>
+  </form>
+</div>

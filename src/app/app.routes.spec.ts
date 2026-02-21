@@ -19,4 +19,10 @@ describe('AppRoutes', () => {
     const route = router.config.find(r => r.path === '' && r.redirectTo === 'students');
     expect(route).toBeDefined();
   });
+
+  it('should lazy load students module', () => {
+    const route = router.config.find(r => r.path === 'students');
+    expect(route).toBeDefined();
+    expect(route?.loadChildren).toBeDefined();
+  });
 });

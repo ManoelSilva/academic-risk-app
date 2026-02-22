@@ -136,19 +136,28 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Pedra</mat-label>
-            <input matInput formControlName="pedra">
+            <mat-select formControlName="pedra">
+              <mat-option value="">—</mat-option>
+              <mat-option *ngFor="let opt of pedraOptions" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
 
         <div class="form-row two-col">
           <mat-form-field appearance="outline">
             <mat-label>Ponto Virada</mat-label>
-            <input matInput formControlName="pontoVirada">
+            <mat-select formControlName="pontoVirada">
+              <mat-option value="">—</mat-option>
+              <mat-option *ngFor="let opt of pontoViradaOptions" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Sinalizador Ingressante</mat-label>
-            <input matInput formControlName="sinalizadorIngressante">
+            <mat-select formControlName="sinalizadorIngressante">
+              <mat-option value="">—</mat-option>
+              <mat-option *ngFor="let opt of sinalizadorIngressanteOptions" [value]="opt">{{ opt }}</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </mat-card-content>

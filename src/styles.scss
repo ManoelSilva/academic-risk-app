@@ -32,6 +32,19 @@ h1, h2, h3, h4 {
   border-radius: 8px !important;
 }
 
+.mat-mdc-select-panel,
+.cdk-overlay-pane .mat-mdc-select-panel {
+  background-color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+  border-radius: 8px !important;
+}
+
+.cdk-overlay-pane:has(.mat-mdc-select-panel) {
+  background-color: #ffffff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+}
+
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
   opacity: 0.3 !important;
   background-color: #000 !important;

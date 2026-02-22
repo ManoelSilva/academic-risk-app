@@ -102,6 +102,12 @@ describe('StudentFormComponent', () => {
       expect(component.maxDate.getFullYear()).toBe(currentYear + 2);
     });
 
+    it('should expose fixed options for Pedra, Ponto Virada, and Sinalizador Ingressante', () => {
+      expect(component.pedraOptions).toEqual(['Ágata', 'Quartzo', 'Ametista', 'Topázio']);
+      expect(component.pontoViradaOptions).toEqual(['Sim', 'Não']);
+      expect(component.sinalizadorIngressanteOptions).toEqual(['Ingressante', 'Veterano']);
+    });
+
     it('should update academicYear form value via chosenYearHandler', () => {
       const fakeDate = new Date(2025, 0, 1);
       const fakePicker = { close: jasmine.createSpy('close') } as any;

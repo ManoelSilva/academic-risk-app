@@ -1,0 +1,9 @@
+node_modules
+dist
+.angular
+.vscode
+.git
+.gitignore
+*.md
+prompt.txt
+server/academic_risk.db

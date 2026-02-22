@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"npm run server\" \"ng serve\"",
+    "start": "concurrently \"npm run server\" \"ng serve --host 0.0.0.0\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

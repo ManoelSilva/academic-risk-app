@@ -29,3 +29,20 @@ export interface AcademicRiskResponse {
   count: number;
   predictions: RiskPrediction[];
 }
+
+export interface RiskEvaluationResult {
+  riskScore: number;
+  riskProbability: number;
+  riskLabel: string;
+  riskEvaluatedAt: string;
+}
+
+export interface RiskEvaluationResponse {
+  status: string;
+  prediction: RiskEvaluationResult;
+}
+
+export interface RiskEvaluationError {
+  status: string;
+  message: string;
+}

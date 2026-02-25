@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"npm run server\" \"ng serve\"",
+    "start": "concurrently \"npm run server\" \"ng serve --host 0.0.0.0\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -36,6 +36,7 @@
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
     "express": "^5.2.1",
+    "prom-client": "^15.1.0",
     "rxjs": "~7.8.0",
     "sqlite3": "^5.1.7",
     "tslib": "^2.3.0",

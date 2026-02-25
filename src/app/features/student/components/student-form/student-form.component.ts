@@ -21,6 +21,10 @@ export class StudentFormComponent implements OnInit {
   maxDate = new Date(new Date().getFullYear() + 2, 11, 31);
   academicYearDate: Date;
 
+  readonly pedraOptions = ['Ágata', 'Quartzo', 'Ametista', 'Topázio'];
+  readonly pontoViradaOptions = ['Sim', 'Não'];
+  readonly sinalizadorIngressanteOptions = ['Ingressante', 'Veterano'];
+
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,

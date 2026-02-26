@@ -14,6 +14,7 @@ const {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const RISK_MODEL_URL = process.env.RISK_MODEL_URL || 'http://localhost:5000';
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,7 +30,6 @@ app.get('/api/metrics', async (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
-  const RISK_MODEL_URL = process.env.RISK_MODEL_URL || 'http://localhost:5000';
   fetch(`${RISK_MODEL_URL}/health`, { signal: AbortSignal.timeout(5000) })
     .then(r => {
       modelApiHealth.set(r.ok ? 1 : 0);
@@ -203,8 +203,6 @@ app.delete("/api/students/:id", (req, res) => {
             res.json({"message":"deleted", changes: this.changes})
     });
 });
-
-const RISK_MODEL_URL = process.env.RISK_MODEL_URL || 'http://localhost:5000';
 
 app.post('/api/risk/evaluate/:studentId', (req, res) => {
     const studentId = req.params.studentId;

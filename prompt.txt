@@ -1,0 +1,260 @@
+You will receive:
+1) An Angular project that must be used as the visual and architectural style reference.
+2) A Risk Model API project that will also be provided as context.
+
+Your task is to build a new Angular frontend application that:
+- Strictly follows the structure, coding conventions, naming patterns, folder organization, styling system, and architectural patterns of the provided Angular reference project.
+- Uses a local SQLite database as persistence.
+- Implements a CRUD system where an academic professor can register and manage student data.
+- Uses the registered student data to call the Academic Risk Model API.
+- Displays the returned academic risk evaluation clearly in the UI.
+- Has 100% unit test coverage (components, services, interceptors, guards, utilities, etc.).
+
+Rules:
+- Mirror the style and patterns of the reference Angular project.
+- Reuse its configuration style (eslint, prettier, testing patterns, etc.).
+- Use best practices (SOLID, clean architecture where applicable).
+- Use reactive forms.
+- Use Angular latest stable version.
+- Use Angular testing best practices (Jasmine + Karma or Jest — match reference project).
+- Use mocking for API calls in tests.
+- Every file created must include unit tests.
+- Maintain strict TypeScript typing.
+- Do NOT skip tests.
+- Do NOT leave TODOs.
+
+We will build this in incremental phases.
+Do not jump ahead of the current phase.
+Wait for confirmation before proceeding to the next phase.
+
+PHASE 1 — PROJECT INITIALIZATION
+
+1. Create a new Angular project following exactly the same structure and configuration as the reference Angular project provided in context.
+2. Replicate:
+   - tsconfig structure
+   - angular.json patterns
+   - linting configuration
+   - folder organization
+   - naming conventions
+   - styling strategy (SCSS, CSS modules, etc.)
+   - testing setup
+
+3. Configure:
+   - Routing module
+   - CoreModule
+   - SharedModule
+   - Feature-based modular structure
+
+4. Add SQLite integration strategy:
+   - Use a lightweight Node + Express backend inside the same workspace OR
+   - Use better-sqlite3 or sqlite3 via an Angular-compatible backend adapter
+   - Abstract DB access behind a service layer
+
+5. Create base models:
+   - Student
+   - AcademicRiskRequest
+   - AcademicRiskResponse
+
+6. Ensure 100% test coverage for:
+   - Modules
+   - Routing
+   - Models (if logic exists)
+   - Base services (even if stubbed)
+
+When finished:
+- Provide a summary of architecture.
+- Show coverage report.
+- Wait for PHASE 2.
+
+PHASE 2 — LOCAL SQLITE DATA LAYER
+
+1. Implement SQLite schema:
+
+Student table:
+- id (primary key)
+- fullName
+- registrationNumber
+- course
+- academicYear
+- gpa
+- attendancePercentage
+- createdAt
+- updatedAt
+- inde
+- iaa
+- ieg
+- ips
+- ida
+- ipp
+- ipv
+- ian
+- defasagem
+- idadeAluno
+- anosPm
+- pedra
+- pontoVirada
+- sinalizadorIngressante
+
+2. Create:
+- StudentRepository
+- StudentService
+- Proper DTO mapping
+- Validation layer
+
+3. Implement full CRUD:
+- Create Student
+- Get All Students
+- Get Student by ID
+- Update Student
+- Delete Student
+
+4. Add error handling strategy.
+
+5. Fully unit test:
+- Repository
+- Service layer
+- Validation logic
+- Edge cases
+
+6. Ensure coverage remains 100%.
+
+Output:
+- Schema
+- Service implementation
+- Test coverage report
+
+Wait for PHASE 3.
+
+PHASE 3 — ANGULAR STUDENT CRUD UI
+
+1. Create a Student Feature Module.
+2. Implement:
+   - Student List Component
+   - Student Form Component (Reactive Forms)
+   - Student Detail Component
+   - Delete confirmation dialog
+
+3. Follow exact visual style from reference Angular project.
+
+4. Use:
+   - Reactive forms
+   - Form validation
+   - Typed FormGroups
+   - Strict typing
+
+5. Create StudentApiService:
+   - Connect to local SQLite abstraction layer.
+   - Handle HTTP communication.
+
+6. Implement:
+   - Loading states
+   - Error states
+   - Clean UX patterns consistent with reference project
+
+7. Write unit tests for:
+   - All components
+   - Service
+   - Form validation
+   - Routing
+   - Error scenarios
+   - Mock HTTP calls
+
+8. Achieve 100% coverage.
+
+Provide:
+- Component structure summary
+- Test summary
+- Coverage report
+
+Wait for PHASE 4.
+
+PHASE 4 — RISK MODEL INTEGRATION
+
+1. Analyze the provided Risk Model API project from context.
+2. Create RiskModelService in Angular.
+3. Implement method:
+   evaluateStudentRisk(studentId: string)
+
+Flow:
+- Retrieve student data from SQLite.
+- Map to AcademicRiskRequest.
+- Call Risk Model API.
+- Receive AcademicRiskResponse.
+- Persist evaluation result locally.
+- Display result in UI.
+
+4. Add:
+   - Retry strategy
+   - Timeout handling
+   - Proper error classification
+
+5. Update Student Detail page:
+   - Add "Evaluate Risk" button
+   - Display:
+     - Risk score
+     - Risk classification
+     - Explanation (if provided)
+
+6. Add unit tests:
+   - API call mocking
+   - Success scenario
+   - Failure scenario
+   - Timeout
+   - Mapping validation
+
+Maintain 100% coverage.
+
+Wait for PHASE 5.
+
+PHASE 5 — PRODUCTION HARDENING
+
+You are an expert DevOps and backend engineer. Your task is to design and generate a complete infrastructure stack to monitor MLflow metrics stored in a SQLite database using Prometheus and Grafana.
+
+Requirements:
+
+1. **MLflow Data Source**:
+   - The MLflow tracking server stores experiments and metrics in a SQLite database.
+   - You must expose these metrics to Prometheus.
+
+2. **Prometheus**:
+   - Set up Prometheus to scrape metrics from MLflow.
+   - Include any necessary exporter or service to convert SQLite data into Prometheus metrics.
+
+3. **Grafana**:
+   - Connect Grafana to Prometheus.
+   - Automatically create a dashboard to display MLflow metrics such as accuracy, loss, and training duration over time.
+   - Include panels comparing multiple runs and experiments.
+
+4. **Deployment**:
+   - Provide Docker Compose or Kubernetes manifests for MLflow, Prometheus, and Grafana.
+   - Ensure persistent volumes for SQLite, Prometheus data, and Grafana dashboards.
+
+5. **Extras**:
+   - Include proper configuration for ports, networking, and environment variables.
+   - Ensure the stack can be launched locally for testing.
+
+Instructions for the output:
+- Generate complete Docker Compose / Kubernetes files.
+- Generate configuration files for Prometheus and Grafana.
+- Provide a brief explanation of each component and how metrics flow from MLflow SQLite to Grafana.
+
+Constraints:
+- Assume no external cloud services; everything runs locally in Docker or Kubernetes.
+- Make it production-ready but simple enough for a POC.
+- The solution must be self-contained: running docker-compose up should give a working stack.
+
+Your output should be in English, precise, and ready to copy-paste into files.
+
+Provide:
+- Final architecture diagram (text-based)
+- Coverage metrics
+- Summary of risk model integration
+- List of test strategies used
+
+AUTO MODE RULES:
+- Do not refactor unrelated files.
+- Do not modify reference project.
+- Only create or modify files inside the new project folder.
+- Keep commits logically grouped per phase.
+- Always run tests after changes.
+- Stop immediately if coverage drops below 100%.
